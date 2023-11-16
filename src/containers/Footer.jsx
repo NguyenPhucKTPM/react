@@ -5,23 +5,23 @@ export default function Footer() {
   return (
     <>
     <ul>
-        <li>
-          <Link to={``}>
+        <li >
+          <Link to={``} className='text-light' >
             Giới thiệu công ty
           </Link>
         </li>
         <li>
-          <Link to={``}>
+          <Link to={``} className='text-light'>
             Liên hệ và góp ý
           </Link>
         </li>
         <li>
-          <Link to={``}>
+          <Link to={``} className='text-light'>
             Tìm siêu thị
           </Link>
         </li>
         <li>
-          <Link to={``}>Bảo hành</Link>
+          <Link to={``} className='text-light'> Bảo hành</Link>
         </li>
       </ul>
     </>

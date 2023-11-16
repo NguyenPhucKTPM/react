@@ -1,4 +1,5 @@
 import './App.css';
+import './App.scss';
 import { ContextProvider } from './containers/context';
 import TestContext from './containers/testContext';
 import Todos from './containers/Todos';
@@ -11,15 +12,15 @@ function App() {
 
   return (
     <ContextProvider>
-      <div className='container'>
-        <div className='header'> {' '} <Header /></div>
-        {/* <TestContext /> */}
-        <div className='outlet'>
-          {' '}
-          <Outlet />
-        </div>
+      <div className='header'> {' '} <Header /></div>
+
+      {/* <TestContext /> */}
+
+      <div className='container p-0 outlet'>
+        {''}
+        <Outlet />
       </div>
-      <div className='footer'>
+      <div className='footer' style={{background:'blue'}}>
         {' '}
         <Footer />
       </div>
