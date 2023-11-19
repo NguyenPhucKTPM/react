@@ -1,14 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-
-
+import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Context } from './context';
 import Information from './Information';
 // import Button from './Button';
@@ -41,7 +34,7 @@ export default function Header(props) {
 
             </ul> */}
             <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
-                <Container>
+                <Container className='p-0'>
                     <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
@@ -52,11 +45,9 @@ export default function Header(props) {
                         >
                             <Nav.Link href="#action1">Home</Nav.Link>
                             <Nav.Link href="#action2">Link</Nav.Link>
-                            <NavDropdown title="Link" id="navbarScrollingDropdown">
-                                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action4">
-                                    Another action
-                                </NavDropdown.Item>
+                            <NavDropdown title="Quản li web" id="navbarScrollingDropdown">
+                                <NavDropdown.Item href="/list-user">Danh sách người dùng</NavDropdown.Item>
+                                <NavDropdown.Item href="/">a</NavDropdown.Item>                               
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#action5">
                                     Something else here

@@ -4,7 +4,9 @@ import Login from "./Login";
 import ProductApp from './ProductApp';
 import DSSanPhamNB from "./DSSanPhamNB";
 import SanPham from "./SanPham";
+
 import ListUser from "./users/ListUser";
+import UpdateUser from "./users/UpdateUser";
 
 
 const router = createBrowserRouter([
@@ -39,8 +41,14 @@ const router = createBrowserRouter([
                 element: <Login />,
             },
             {
-                path: 'a',
+                path: 'list-user',
                 element: <ListUser />,
+            },
+            {
+                path: 'update-user/:userName',
+                element:(
+                    <UpdateUser />
+                )
             },
             {
                 path: '*',

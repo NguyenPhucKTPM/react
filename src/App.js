@@ -6,6 +6,7 @@ import Todos from './containers/Todos';
 import Header from './containers/Header';
 import { Outlet } from 'react-router-dom';
 import Footer from './containers/Footer';
+import { ToastContainer, toast } from 'react-toastify'
 
 
 function App() {
@@ -20,12 +21,24 @@ function App() {
         {''}
         <Outlet />
       </div>
-      <div className='footer' style={{background:'blue'}}>
+      <div className='footer' style={{ background: 'blue' }}>
         {' '}
         <Footer />
       </div>
-
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </ContextProvider>
+
 
   );
 }
