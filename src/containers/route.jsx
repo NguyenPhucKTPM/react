@@ -7,8 +7,10 @@ import SanPham from "./SanPham";
 
 import ListUser from "./users/ListUser";
 import UpdateUser from "./users/UpdateUser";
+import DeleteUser from "./users/DeleteUser";
 
-
+import ListCategory from "./categories/ListCategory";
+import UpdateCategory from "./categories/UpdateCategory";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -48,6 +50,24 @@ const router = createBrowserRouter([
                 path: 'update-user/:userName',
                 element:(
                     <UpdateUser />
+                )
+            },
+            {
+                path: 'update-user/:userName',
+                element:(
+                    <DeleteUser />
+                )
+            },
+            {
+                path: 'list-category',
+                element:(
+                    <ListCategory />
+                )
+            },
+            {
+                path: 'update-category/:idDanhMuc',
+                element:(
+                    <UpdateCategory />
                 )
             },
             {

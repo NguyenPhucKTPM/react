@@ -19,7 +19,7 @@ export default function AddUser(
         fullName: '',
         sex: '',
         email: '',
-        address: '',
+        address: '',  
         groupId: '',
     });
     //state bao loi
@@ -36,7 +36,7 @@ export default function AddUser(
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let res = await UserService.insertUser(
+            await UserService.insertUser(
                 input.userName,
                 input.password,
                 input.rePassword,
@@ -49,6 +49,7 @@ export default function AddUser(
             handleClose();
             toast.success(`Thêm người dùng thành công: ${input.userName}`)
             reloadListUser();
+            setInput({});
         } catch (error) {
             console.log(input)
             console.error('Lỗi từ server:', error.response.data.message);
@@ -58,7 +59,7 @@ export default function AddUser(
     }
     return (
         <>
-            <Modal show={showModal} onHide={handleClose}>
+            <Modal show={showModal} onHide={handleClose}  backdrop="static" keyboard={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>Thêm người dùng</Modal.Title>
                 </Modal.Header>

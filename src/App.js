@@ -21,7 +21,7 @@ function App() {
         {''}
         <Outlet />
       </div>
-      <div className='footer' style={{ background: 'blue' }}>
+      <div className='footer mt-3' style={{ background: 'blue' }}>
         {' '}
         <Footer />
       </div>

@@ -18,12 +18,24 @@ const insertUser = async (userName,password,rePassword,fullName,address,sex,emai
 const detailUser = async(userName) =>{
     return await axios.get(`/detail-user/${userName}`)
 }
-const updateUser = async() =>{
-
+const updateUser = async(userName,password,fullName,address, sex, email,groupID) =>{
+    return await axios.post('/update-user/', {
+        userName,
+        password,
+        fullName,
+        address,
+        sex,
+        email,
+        groupID,
+    });
+}
+const deleteUser = async(userName) =>{
+    return await axios.delete(`/delete-user/${userName}`)
 }
 export default{
     getAllUser,
     insertUser,
     detailUser,
     updateUser,
+    deleteUser,
 }

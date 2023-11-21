@@ -47,7 +47,7 @@ export default function Header(props) {
                             <Nav.Link href="#action2">Link</Nav.Link>
                             <NavDropdown title="Quản li web" id="navbarScrollingDropdown">
                                 <NavDropdown.Item href="/list-user">Danh sách người dùng</NavDropdown.Item>
-                                <NavDropdown.Item href="/">a</NavDropdown.Item>                               
+                                <NavDropdown.Item href="/list-category">Danh sách danh mục</NavDropdown.Item>                               
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#action5">
                                     Something else here

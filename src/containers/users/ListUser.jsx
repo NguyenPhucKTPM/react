@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Table } from 'react-bootstrap'
 import UserService from '../../services/UserService'
 import AddUser from './AddUser'
+import DeleteUser from './DeleteUser'
 
 export default function ListUser() {
     const [listUser, setListUser] = useState([]);
@@ -18,16 +19,24 @@ export default function ListUser() {
     }
     // console.log(listUser)
 
-    const [showModal, setShowModal] = useState(false);
+    const [showModalAdd, setShowModalAdd] = useState(false);
+    const [showModalDel, setShowModalDel] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
 
+    const handleDeleteUser = (user) => {
+        setSelectedUser(user);
+        setShowModalDel(true);
+        console.log(user)
+    }
     const handleClose = () => {
-        setShowModal(false);
+        setShowModalAdd(false);
+        setShowModalDel(false);
     }
     return (
         <>
             <div className='my-3 d-flex justify-content-between'>
                 <span>Danh sách người dùng:</span>
-                <button className='btn btn-primary' onClick={() => setShowModal(true)}>Thêm người dùng</button>
+                <button className='btn btn-primary' onClick={() => setShowModalAdd(true)}>Thêm người dùng</button>
             </div>
             <Table striped bordered hover variant="dark">
                 <thead>
@@ -58,9 +67,8 @@ export default function ListUser() {
                                         <button className='btn btn-warning mx-2'>
                                             <Link className='text-black' to={`/update-user/${item.userName}`}>Cập nhật</Link>
                                         </button>
-                                        <button className='btn btn-danger'>
-                                            <Link className='text-white' to={`/delete-user/${item.userName} `}>Xóa</Link>
-                                        </button>
+                                        <button className='btn btn-danger' onClick={() => handleDeleteUser(item)}>Xóa</button>
+
                                     </th>
                                 </tr>
                             )
@@ -69,11 +77,17 @@ export default function ListUser() {
                 </tbody>
             </Table>
             <AddUser
-                showModal={showModal}
+                showModal={showModalAdd}
                 handleClose={handleClose}
-                reloadListUser ={getListUser}
+                reloadListUser={getListUser}
             />
-            
+            <DeleteUser
+                showModal={showModalDel}
+                handleClose={handleClose}
+                reloadListUser={getListUser}
+                user={selectedUser}
+            />
+
         </>
     )
 }
