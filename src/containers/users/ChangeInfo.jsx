@@ -1,40 +1,37 @@
 import React, { useEffect, useState } from 'react'
-import UserService from '../../services/UserService'
-import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import UserService from '../../services/UserService';
 import { toast } from 'react-toastify';
-export default function UpdateUser() {
-    //lay chi tiet nguoi dung
-    let { userName } = useParams();
-    console.log(userName);
+
+export default function ChangeInfo() {
+    const [input, setInput] = useState({
+        fullName: '',
+        address: '',
+        sex: '',
+        email: '',
+    })
     const [detailUser, setDetailUser] = useState(null);
+    const navigate = useNavigate();
     useEffect(() => {
         const getDetailUser = async () => {
-            const res = await UserService.detailUser(userName)
-            if (res && res.data) {
-                setDetailUser(res.data)
-                // console.log(res.data)
+            try {
+                const res = await UserService.getMyInfo();
+                if (res && res.data) {
+                    setDetailUser(res.data.detailUser);
+                }
+            } catch (error) {
+                navigate('/');
             }
         }
         getDetailUser()
-    }, [userName])
-    // cap nhat nguoi dung
-    const [input, setInput] = useState({
-        // userName: '',
-        fullName: '',
-        sex: '',
-        email: '',
-        address: '',
-        groupID: '',
-    })
+    }, [])
     useEffect(() => {
-        // Đảm bảo rằng giá trị của input.fullName chỉ được cập nhật khi detailUser thay đổi
         setInput((prevInput) => ({
             ...prevInput,
             fullName: detailUser?.fullName || '',
             sex: detailUser?.sex || '',
             email: detailUser?.email || '',
             address: detailUser?.address || '',
-            groupID: detailUser?.groupID || '',
             // userName: detailUser?.userName || '',
 
         }));
@@ -48,20 +45,20 @@ export default function UpdateUser() {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(input)
         try {
-            await UserService.updateUser(
+            await UserService.updateMyInfo(
                 input.fullName,
                 input.address,
                 input.sex,
                 input.email,
-                input.groupID,
-                userName,
             );
-            toast.success(`Cập nhật người dùng thành công: ${userName}`)
+            toast.success(`Cập nhật người dùng thành công: ${detailUser?.userName}`)
         } catch (error) {
             console.log(input)
             console.error('Lỗi từ server:', error.response.data.message);
         }
+       
     }
     return (
         <>
@@ -128,20 +125,6 @@ export default function UpdateUser() {
                         onChange={handleInputChange}
                     />
                 </div>
-                <label htmlFor="gruopID">Chọn quyền:</label>
-                <div class="mt-3 mb-3">
-                    <select class="form-select" id='gruopID' aria-label="gruopID" name="groupID" value={input.groupId} onChange={handleInputChange}>
-                        <option selected value={input.groupID}>{detailUser?.role}</option>
-                        <option value="1">Admin</option>
-                        <option value="2">User</option>
-                    </select>
-                </div>
-                {/* <input type="hidden"
-                    name="userName"
-                    class="form-control"
-                    value={input.userName}
-                    onChange={handleInputChange}
-                /> */}
                 <div className=' mt-3 mb-3 d-flex justify-content-end'>
                     <button onClick={handleSubmit} className='btn btn-primary'>Sửa</button>
                 </div>

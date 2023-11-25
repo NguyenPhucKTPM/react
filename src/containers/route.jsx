@@ -1,74 +1,109 @@
-import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import Login from "./Login";
-import ProductApp from './ProductApp';
+import { Navigate, Outlet, createBrowserRouter } from "react-router-dom";
+// import App from "../App";
+// import Login from "./Login";
+// import ProductApp from './ProductApp';
 import DSSanPhamNB from "./DSSanPhamNB";
-import SanPham from "./SanPham";
+// import SanPham from "./SanPham";
 
 import ListUser from "./users/ListUser";
 import UpdateUser from "./users/UpdateUser";
-import DeleteUser from "./users/DeleteUser";
+import DetailUser from "./users/DetailUser"
+import DetailInfo from "./users/DetailInfo";
+import ChangeInfo from "./users/ChangeInfo";
+import ChangePass from "./users/ChangePass";
+import Login from "./users/Login";
 
 import ListCategory from "./categories/ListCategory";
 import UpdateCategory from "./categories/UpdateCategory";
+import DetailCategory from "./categories/DetailCategory";
+
+import ListProduct from "./product/ListProduct";
+import UpdateProduct from "./product/UpdateProduct";
+import DetailProduct from "./product/DetailProduct";
+import ViewProduct from "./product/ViewProduct";
+import ViewDetailProduct from "./product/ViewDetailProduct";
+
+import Layout from "./layouts/Layout";
+import { AppContext } from "../context/AppProvider";
+import { useContext } from "react";
+
+function ProtectedRoute({ allowedRoles }) {
+    const { currentUser } = useContext(AppContext);
+    if (!currentUser.isAuthenticated || !allowedRoles.includes(currentUser.role)) {
+        return <Navigate to='/' />
+    }
+    return <Outlet />
+}
+
 const router = createBrowserRouter([
     {
-        path: '/',
-        element: <App />,
+
         children: [
             {
-                index: true,
+                path: '/',
                 element: (
-                    <DSSanPhamNB />
+                    <Layout>
+                        <DSSanPhamNB />
+                    </Layout>
                 ),
             },
+            // {
+            //     path: 'sanpham/:iddm',
+            //     element: (
+            //         <DSSanPhamNB />
+            //     ),
+            // },
+            // {
+            //     path: 'sanpham/chitiet/:idsp',
+            //     element: (
+            //         <SanPham sanpham={null} />
+            //     ),
+            // },
+            // {
+            //     path: 'themsanpham',
+            //     element: <ProductApp />,
+            // },
             {
-                path: 'sanpham/:iddm',
-                element: (
-                    <DSSanPhamNB />
-                ),
+                path: 'login',
+                element:
+                    <Layout>
+                        <Login />
+                    </Layout>,
             },
             {
-                path: 'sanpham/chitiet/:idsp',
-                element: (
-                    <SanPham sanpham={null} />
-                ),
+                path: 'my-infomation',
+                element:
+                    <Layout>
+                        <DetailInfo />
+                    </Layout>,
             },
             {
-                path: 'themsanpham',
-                element: <ProductApp />,
+                path: 'update-my-infomation',
+                element:
+                    <Layout>
+                        <ChangeInfo />
+                    </Layout>,
             },
             {
-                path: 'dangnhap',
-                element: <Login />,
+                path: 'change-password',
+                element:
+                    <Layout>
+                        <ChangePass />
+                    </Layout>,
             },
             {
-                path: 'list-user',
-                element: <ListUser />,
+                path: 'category-product/:idDanhMuc',
+                element:
+                    <Layout>
+                        <ViewProduct />
+                    </Layout>,
             },
             {
-                path: 'update-user/:userName',
-                element:(
-                    <UpdateUser />
-                )
-            },
-            {
-                path: 'update-user/:userName',
-                element:(
-                    <DeleteUser />
-                )
-            },
-            {
-                path: 'list-category',
-                element:(
-                    <ListCategory />
-                )
-            },
-            {
-                path: 'update-category/:idDanhMuc',
-                element:(
-                    <UpdateCategory />
-                )
+                path: 'view-detail-product/:idSanPham',
+                element:
+                    <Layout>
+                        <ViewDetailProduct />
+                    </Layout>,
             },
             {
                 path: '*',
@@ -79,6 +114,100 @@ const router = createBrowserRouter([
                 ),
             },
         ],
-    }
+    },
+
+
+    //Route Admin
+    {
+        element: <ProtectedRoute allowedRoles={['admin']} />,
+        children: [
+            //quan li chuc nang module user
+            {
+                path: 'list-user',
+                element:
+                    <Layout>
+                        <ListUser />
+                    </Layout>,
+            },
+            {
+                path: 'update-user/:userName',
+                element:
+                    <Layout>
+                        <UpdateUser />
+                    </Layout>,
+
+            },
+            {
+                path: 'detail-user/:userName',
+                element:
+                    <Layout>
+                        <DetailUser />
+                    </Layout>,
+
+            },
+           
+            ///quan li chuc nang module category
+            {
+                path: 'list-category',
+                element:
+                    <Layout>
+                        <ListCategory />
+                    </Layout>,
+
+            },
+            {
+                path: 'update-category/:idDanhMuc',
+                element:
+                    <Layout>
+                        <UpdateCategory />
+                    </Layout>,
+
+            },
+            {
+                path: 'detail-category/:idDanhMuc',
+                element:
+                    <Layout>
+                        <DetailCategory />
+                    </Layout>,
+
+            },
+
+            //quan li chuc nang module product
+            {
+                path: 'list-product',
+                element:
+                    <Layout>
+                        <ListProduct />
+                    </Layout>,
+
+            },
+            {
+                path: 'update-product/:idSanPham',
+                element:
+                    <Layout>
+                        <UpdateProduct />
+                    </Layout>,
+
+            },
+            {
+                path: 'detail-product/:idSanPham',
+                element:
+                    <Layout>
+                        <DetailProduct />
+                    </Layout>,
+
+            },
+        ]
+    },
+
+    // route user
+    {
+        element: <ProtectedRoute allowedRoles={['user']} />,
+        children: [
+            {
+                
+            },
+        ]
+    },
 ]);
 export default router;

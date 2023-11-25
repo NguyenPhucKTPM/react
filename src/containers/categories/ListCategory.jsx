@@ -59,6 +59,9 @@ export default function ListCategory() {
                                     <td>{item.idDanhMuc}</td>
                                     <td>{item.tenDanhMuc}</td>
                                     <th className='d-flex justify-content-center'>
+                                    <button className='btn btn-success'>
+                                            <Link className='text-white' to={`/detail-category/${item.idDanhMuc}`}>Xem</Link>
+                                        </button>
                                         <button className='btn btn-warning mx-2'>
                                             <Link className='text-black' to={`/update-category/${item.idDanhMuc}`}>Cập nhật</Link>
                                         </button>

@@ -12,8 +12,9 @@ export default function AddCategory(
 ) {
 
     const [input, setInput] = useState('');
+    const [error, setError] = useState('');
 
-    const handlSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             await CategoryService.insertCategory(input);
@@ -23,6 +24,8 @@ export default function AddCategory(
             setInput('')
         } catch (error) {
             console.error('Lỗi từ server:', error.response.data.message);
+            setError(error.response.data.message)
+
         }
     }
     return (
@@ -48,10 +51,11 @@ export default function AddCategory(
                     <Button variant="secondary" onClick={handleClose}>
                         Đóng
                     </Button>
-                    <Button variant="primary" onClick={handlSubmit} >
+                    <Button variant="primary" onClick={handleSubmit} >
                         Thêm
                     </Button>
                 </Modal.Footer>
+                <span className='text-center text-danger mb-2'>{error}</span>
 
             </Modal>
 

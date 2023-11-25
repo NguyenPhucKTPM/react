@@ -12,7 +12,6 @@ const detailCategory = async(idDanhMuc) =>{
 const updateCategory = async(tenDanhMuc,idDanhMuc) =>{
     return await axios.post(`/update-category/${idDanhMuc}`, {
         tenDanhMuc,
-        // idDanhMuc,
     });
 }
 const deleteCategory = async(idDanhMuc) =>{

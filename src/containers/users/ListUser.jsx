@@ -64,6 +64,9 @@ export default function ListUser() {
                                     <td>{item.email}</td>
                                     <th>{item.role}</th>
                                     <th className='d-flex justify-content-center'>
+                                        <button className='btn btn-success'>
+                                            <Link className='text-white' to={`/detail-user/${item.userName}`}>Xem</Link>
+                                        </button>
                                         <button className='btn btn-warning mx-2'>
                                             <Link className='text-black' to={`/update-user/${item.userName}`}>Cập nhật</Link>
                                         </button>

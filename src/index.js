@@ -4,12 +4,16 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider } from 'react-router-dom';
 import router from './containers/route';
 import 'react-toastify/dist/ReactToastify.css';
+import App from './App';
+import { AppProvider } from './context/AppProvider';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AppProvider>
+      < App />
+    </AppProvider>
   </React.StrictMode>
 );
 
