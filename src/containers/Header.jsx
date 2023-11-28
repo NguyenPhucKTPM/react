@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Menu from './categories/Menu';
-import { Context } from './context';
-import Information from './Information';
-// import Button from './Button';
-import DanhMucNB from './DanhMucNB';
+// import { Context } from './context';
+// import Information from './Information';
+// // import Button from './Button';
+// import DanhMucNB from './DanhMucNB';
 import { AppContext } from '../context/AppProvider';
 
 export default function Header(props) {
@@ -39,7 +39,7 @@ export default function Header(props) {
             </ul> */}
             <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
                 <Container className='p-0'>
-                    <Navbar.Brand href="#">SmartPhoneStore</Navbar.Brand>
+                    <Navbar.Brand href="/">SmartPhoneStore</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -75,7 +75,10 @@ export default function Header(props) {
                                     <Nav.Link onClick={logoutContext}>Logout</Nav.Link>
                                 </>
                             ) : (
-                                <Nav.Link href="/login">Đăng nhập</Nav.Link>
+                                <>
+                                    <Nav.Link href="/login">Đăng nhập</Nav.Link>
+                                    <Nav.Link href="/register">Đăng ký</Nav.Link>
+                                </>
                             )}
                         </Nav>
                         <Form className="d-flex">

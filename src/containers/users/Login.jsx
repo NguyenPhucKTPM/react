@@ -9,13 +9,8 @@ export default function Login() {
     const [password, setpassword] = useState('');
     const [error, setError] = useState('');
     const { loginContext } = useContext(AppContext)
-    const { currentUser } = useContext(AppContext)
     const navigate = useNavigate();
-    useEffect(() => {
-        if (currentUser.isAuthenticated) {
-            navigate('/');
-        }
-    }, [currentUser.isAuthenticated, navigate]);
+   
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

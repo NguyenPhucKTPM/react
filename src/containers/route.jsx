@@ -12,6 +12,7 @@ import DetailInfo from "./users/DetailInfo";
 import ChangeInfo from "./users/ChangeInfo";
 import ChangePass from "./users/ChangePass";
 import Login from "./users/Login";
+import Register from "./users/Register";
 
 import ListCategory from "./categories/ListCategory";
 import UpdateCategory from "./categories/UpdateCategory";
@@ -22,6 +23,7 @@ import UpdateProduct from "./product/UpdateProduct";
 import DetailProduct from "./product/DetailProduct";
 import ViewProduct from "./product/ViewProduct";
 import ViewDetailProduct from "./product/ViewDetailProduct";
+import OutStandingProduct from "./product/OutStandingProduct";
 
 import Layout from "./layouts/Layout";
 import { AppContext } from "../context/AppProvider";
@@ -30,6 +32,13 @@ import { useContext } from "react";
 function ProtectedRoute({ allowedRoles }) {
     const { currentUser } = useContext(AppContext);
     if (!currentUser.isAuthenticated || !allowedRoles.includes(currentUser.role)) {
+        return <Navigate to='/' />
+    }
+    return <Outlet />
+}
+function RejectedRoute() {
+    const { currentUser } = useContext(AppContext);
+    if (currentUser.isAuthenticated ) {
         return <Navigate to='/' />
     }
     return <Outlet />
@@ -43,7 +52,7 @@ const router = createBrowserRouter([
                 path: '/',
                 element: (
                     <Layout>
-                        <DSSanPhamNB />
+                        <OutStandingProduct />
                     </Layout>
                 ),
             },
@@ -63,13 +72,7 @@ const router = createBrowserRouter([
             //     path: 'themsanpham',
             //     element: <ProductApp />,
             // },
-            {
-                path: 'login',
-                element:
-                    <Layout>
-                        <Login />
-                    </Layout>,
-            },
+          
             {
                 path: 'my-infomation',
                 element:
@@ -114,8 +117,7 @@ const router = createBrowserRouter([
                 ),
             },
         ],
-    },
-
+    }, 
 
     //Route Admin
     {
@@ -202,10 +204,21 @@ const router = createBrowserRouter([
 
     // route user
     {
-        element: <ProtectedRoute allowedRoles={['user']} />,
+        element: <RejectedRoute/>,
         children: [
             {
-                
+                path: 'login',
+                element:
+                    <Layout>
+                        <Login />
+                    </Layout>,
+            },
+            {
+                path: 'register',
+                element:
+                    <Layout>
+                        <Register />
+                    </Layout>,
             },
         ]
     },

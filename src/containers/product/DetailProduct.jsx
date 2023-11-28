@@ -27,6 +27,7 @@ export default function DetailProduct() {
                 <h1>Ngày sửa: {detailProduct?.ngaySuaSanPham && format(new Date(detailProduct?.ngaySuaSanPham), "yyyy-MM-dd HH:mm:ss")}</h1>
                 <h1>Giá: {detailProduct?.gia.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} </h1>
                 <h1>Khuyến mãi: {detailProduct?.khuyenMai}%</h1>
+                <h1>Độ nổi bật: {detailProduct?.noiBat == 1 ? 'Nổi bật' : 'Không nổi bật'}</h1>
                 <h1>Hình ảnh:</h1>
                 <img src={`/imageProduct/${detailProduct?.hinhAnh}`} width={100} alt="" />
                 <p>Mô tả: {detailProduct?.moTa}%</p>

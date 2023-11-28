@@ -38,6 +38,9 @@ const deleteProduct = async (idSanPham) => {
 const getProductByCategory = async (idDanhMuc) => {
     return await axios.get(`/category-product/${idDanhMuc}`)
 }
+const getOutStandingProduct = async () => {
+    return await axios.get(`/product-hot`)
+}
 export default {
     getAllProduct,
     insertProduct,
@@ -45,4 +48,5 @@ export default {
     updateProduct,
     deleteProduct,
     getProductByCategory,
+    getOutStandingProduct
 }

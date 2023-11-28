@@ -49,6 +49,11 @@ const changePass = async (curPass, password, rePassword) => {
         curPass, password, rePassword
     })
 }
+const signup = async ( userName, password, rePassword, fullName, address, sex, email) => {
+    return await axios.post('/signup', {
+        userName, password, rePassword, fullName, address, sex, email
+    })
+}
 export default {
     getAllUser,
     insertUser,
@@ -59,5 +64,6 @@ export default {
     Logout,
     getMyInfo,
     updateMyInfo,
-    changePass
+    changePass,
+    signup
 }
