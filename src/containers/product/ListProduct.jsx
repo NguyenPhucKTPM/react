@@ -14,15 +14,11 @@ export default function ListProduct() {
 
     }, [])
     const getListProduct = async () => {
-       try {
         let res = await ProductService.getAllProduct();
         if (res && res.data) {
             setListProduct(res.data);
             // console.log(res.data)
         }
-       } catch (error) {
-        console.log('errror product list',error)
-       }
     }
 
     const [showModalAdd, setShowModalAdd] = useState(false);

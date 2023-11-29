@@ -10,33 +10,10 @@ import Menu from './categories/Menu';
 import { AppContext } from '../context/AppProvider';
 
 export default function Header(props) {
-
-    // const { items, setItems } = useContext(Context);
-    // const user = {
-    //     userName: 'Phuc',
-    //     age: '22',
-    // };
-    // const isLogin = false;
     const { logoutContext } = useContext(AppContext)
     const { currentUser } = useContext(AppContext)
     return (
         <>
-            {/* {items ? items  : 'Chưa có dữ liệu'}             */}
-            {/* <ul>
-                <li><Link to={` `}>Tất cả danh mục</Link></li>
-                <li><DanhMucNB /></li>
-                <li><Link to={`/themsanpham`}>Thêm sản phẩm</Link></li>
-                {isLogin ? (
-                    <>
-                        <Information user={user} />
-                        <li><Button user={user} /></li>
-                    </>
-                ) : (
-                    <li><Link to={`/dangnhap`}>Đăng nhập</Link></li>
-                )}
-
-
-            </ul> */}
             <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
                 <Container className='p-0'>
                     <Navbar.Brand href="/">SmartPhoneStore</Navbar.Brand>
@@ -57,9 +34,6 @@ export default function Header(props) {
                                             <NavDropdown.Item href="/list-category">Danh sách danh mục</NavDropdown.Item>
                                             <NavDropdown.Item href="/list-product">Danh sách sản phẩm</NavDropdown.Item>
                                             <NavDropdown.Divider />
-                                            <NavDropdown.Item href="#action5">
-                                                Something else here
-                                            </NavDropdown.Item>
                                         </NavDropdown>
                                     )}
                                     <NavDropdown title={currentUser?.username} id="navbarScrollingDropdown">
@@ -67,9 +41,6 @@ export default function Header(props) {
                                         <NavDropdown.Item href="/update-my-infomation">Cập nhật thông tin</NavDropdown.Item>
                                         <NavDropdown.Item href="/change-password">Cập nhật mật khẩu</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="#action5">
-                                            Something else here
-                                        </NavDropdown.Item>
                                     </NavDropdown>
                                     <Nav.Link href="#action1" disabled>Quyền: {currentUser?.role}</Nav.Link>
                                     <Nav.Link onClick={logoutContext}>Logout</Nav.Link>

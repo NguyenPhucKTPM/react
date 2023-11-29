@@ -1,12 +1,9 @@
-import {
-    createContext,
-    useState,
-  } from 'react';
+import { createContext,  useState, } from 'react';
 import { useLocalStorage } from '../hook/useLocalStorage';
 import UserService from '../services/UserService';
   
-export const AppContext =
-    createContext(null);
+export const AppContext = createContext(null);
+   
   
   const initialSate = JSON.parse(
     localStorage.getItem('user')
@@ -19,11 +16,9 @@ export const AppContext =
   export const AppProvider = ({
     children,
   }) => {
-    const [currentUser, setCurrentUser] =
-      useState(initialSate);
-  
-    const { setItem, removeItem } =
-      useLocalStorage();
+    const [currentUser, setCurrentUser] =  useState(initialSate);
+    const { setItem, removeItem } = useLocalStorage();
+      
   
     const loginContext = (user) => {
       setCurrentUser((prevState) => ({

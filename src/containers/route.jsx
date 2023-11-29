@@ -2,7 +2,7 @@ import { Navigate, Outlet, createBrowserRouter } from "react-router-dom";
 // import App from "../App";
 // import Login from "./Login";
 // import ProductApp from './ProductApp';
-import DSSanPhamNB from "./DSSanPhamNB";
+// import DSSanPhamNB from "./DSSanPhamNB";
 // import SanPham from "./SanPham";
 
 import ListUser from "./users/ListUser";
@@ -38,60 +38,20 @@ function ProtectedRoute({ allowedRoles }) {
 }
 function RejectedRoute() {
     const { currentUser } = useContext(AppContext);
-    if (currentUser.isAuthenticated ) {
+    if (currentUser.isAuthenticated) {
         return <Navigate to='/' />
     }
     return <Outlet />
 }
-
 const router = createBrowserRouter([
     {
 
         children: [
             {
                 path: '/',
-                element: (
+                element:
                     <Layout>
                         <OutStandingProduct />
-                    </Layout>
-                ),
-            },
-            // {
-            //     path: 'sanpham/:iddm',
-            //     element: (
-            //         <DSSanPhamNB />
-            //     ),
-            // },
-            // {
-            //     path: 'sanpham/chitiet/:idsp',
-            //     element: (
-            //         <SanPham sanpham={null} />
-            //     ),
-            // },
-            // {
-            //     path: 'themsanpham',
-            //     element: <ProductApp />,
-            // },
-          
-            {
-                path: 'my-infomation',
-                element:
-                    <Layout>
-                        <DetailInfo />
-                    </Layout>,
-            },
-            {
-                path: 'update-my-infomation',
-                element:
-                    <Layout>
-                        <ChangeInfo />
-                    </Layout>,
-            },
-            {
-                path: 'change-password',
-                element:
-                    <Layout>
-                        <ChangePass />
                     </Layout>,
             },
             {
@@ -117,8 +77,34 @@ const router = createBrowserRouter([
                 ),
             },
         ],
-    }, 
-
+    },
+    //ca user lan admin
+    {
+        element: <ProtectedRoute allowedRoles={['admin','user']} />,
+        children: [
+            {
+                path: 'my-infomation',
+                element:
+                    <Layout>
+                        <DetailInfo />
+                    </Layout>,
+            },
+            {
+                path: 'update-my-infomation',
+                element:
+                    <Layout>
+                        <ChangeInfo />
+                    </Layout>,
+            },
+            {
+                path: 'change-password',
+                element:
+                    <Layout>
+                        <ChangePass />
+                    </Layout>,
+            },
+        ]
+    },
     //Route Admin
     {
         element: <ProtectedRoute allowedRoles={['admin']} />,
@@ -147,7 +133,7 @@ const router = createBrowserRouter([
                     </Layout>,
 
             },
-           
+
             ///quan li chuc nang module category
             {
                 path: 'list-category',
@@ -201,10 +187,9 @@ const router = createBrowserRouter([
             },
         ]
     },
-
-    // route user
+    // khi o trang thai dang nhap se ko vao day dc
     {
-        element: <RejectedRoute/>,
+        element: <RejectedRoute />,
         children: [
             {
                 path: 'login',
@@ -222,5 +207,6 @@ const router = createBrowserRouter([
             },
         ]
     },
+
 ]);
 export default router;

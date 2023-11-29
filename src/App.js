@@ -9,25 +9,12 @@ import { AppContext } from './context/AppProvider';
 import { eventEmitter } from './services/customizeAxios';
 
 function App() {
-  
- 
   const {logoutContext} = useContext(AppContext);
   eventEmitter.on("tokenExpried", function (data) {
-
     logoutContext()
-
   });
-
-
-
   return (
-
-
     <RouterProvider router={router} />
-     
-
-
-
   );
 }
 
